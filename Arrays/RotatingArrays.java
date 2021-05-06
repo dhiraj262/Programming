@@ -13,12 +13,12 @@ public class RotatingArrays{
             temp[i] = arr[i];
         }
         //shifting the elements to d position in arr
-        for(int i=0;i<n-d+1;i++){
+        for(int i=0;i<n-d;i++){
             arr[i]=arr[i+d];
         }
         //adding the elements from temp array again to the original array.
         int j=0;
-        for(int i=n-d+1;i<n;i++){
+        for(int i=n-d;i<n;i++){
             arr[i] = temp[j++];
         }
     }
