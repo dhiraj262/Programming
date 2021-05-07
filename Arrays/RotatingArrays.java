@@ -39,6 +39,24 @@ public class RotatingArrays{
         }
     }
 
+    //Approach 3: Reversing the array. Reversing the first part till n-d-1, then reversing the send part from n-d to n-1, at the end reversing the whole array.
+    // Time complexity =O(n-d)+O(d)+O(n-1) = O(n) , space comexity = O(1).
+    public static void reverse(int[] arr,int start,int end){
+        int temp;
+        int n=start+end;
+        for(int i=start;i<n/2;i++){
+            //swapping elements from first and last position.
+            temp = arr[i];
+            arr[i] = arr[n-i-1];
+            arr[n-i-1] = temp;
+        }
+    }
+    public static void reverseApproachRotateArray(int[] arr, int n,int d){
+        reverse(arr, 0, d);
+        reverse(arr, d,n);
+        reverse(arr,0,n);
+    }
+
     public static void main(String args[]){
         Scanner sc = new Scanner(System.in);
         int n,d;
@@ -50,7 +68,8 @@ public class RotatingArrays{
         d=sc.nextInt();
         //printing the rotated array.
         //rotateArrayUsingTemp(arr, n, d);
-        rotateArrayApproach2(arr, n, d);
+        //rotateArrayApproach2(arr, n, d);
+        reverseApproachRotateArray(arr, n, d);
         for(int i=0;i<n;i++){
             System.out.printf(arr[i]+" ");
         }
