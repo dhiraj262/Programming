@@ -39,7 +39,20 @@ public class RotatingArrays{
         }
     }
 
-    //Approach 3: Reversing the array. Reversing the first part till n-d-1, then reversing the send part from n-d to n-1, at the end reversing the whole array.
+    //Approach 3: extra array to place the element at (i+d)%length.
+    //Time complexity : O(n) , space complexity : O(n).
+    public static int[] rotate(int[] nums, int d) {
+        int[] a = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+          a[(i + d) % nums.length] = nums[i];
+        }
+        for (int i = 0; i < nums.length; i++) {
+          nums[i] = a[i];
+        }
+        return nums;
+      }
+
+    //Approach 4: Reversing the array. Reversing the first part till n-d-1, then reversing the send part from n-d to n-1, at the end reversing the whole array.
     // Time complexity =O(n-d)+O(d)+O(n-1) = O(n) , space comexity = O(1).
     public static void reverse(int[] arr,int start,int end){
         int temp;
@@ -52,9 +65,30 @@ public class RotatingArrays{
         }
     }
     public static void reverseApproachRotateArray(int[] arr, int n,int d){
-        reverse(arr, 0, d);
-        reverse(arr, d,n);
+        d=d%n;
+        reverse(arr, 0, n-d);
+        reverse(arr, n-d,n);
         reverse(arr,0,n);
+    }
+
+    //Approach 5: using cyclic replacements:
+    //Time complexity : O(n)  , space complexity : O(1).
+    public static void cyclicReplacements(int[] arr, int d){
+        int n = arr.length;
+        d=d%n;
+        int count=0;
+        for(int i=0;count<n;i++){
+            int current = i;
+            int prev = arr[i];
+            do{
+                int next = (current+d)%n;
+                int temp = arr[next];
+                arr[next] = prev;
+                prev = temp;
+                current = next;
+                count++;
+            }while(i!=current);
+        }
     }
 
     public static void main(String args[]){
@@ -69,7 +103,8 @@ public class RotatingArrays{
         //printing the rotated array.
         //rotateArrayUsingTemp(arr, n, d);
         //rotateArrayApproach2(arr, n, d);
-        reverseApproachRotateArray(arr, n, d);
+        //reverseApproachRotateArray(arr, n, d);
+        cyclicReplacements(arr, d);
         for(int i=0;i<n;i++){
             System.out.printf(arr[i]+" ");
         }
