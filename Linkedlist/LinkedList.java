@@ -66,9 +66,10 @@ public class LinkedList {
     void display(){
         Node p = head;
         while(p!=null){
-            System.out.println(p.data);
+            System.out.print(p.data+",");
             p=p.next;
         }
+
     }
     public static void main(String[] args) {
         LinkedList ll = new LinkedList();
@@ -83,7 +84,7 @@ public class LinkedList {
         ll.remove(56);
         ll.remove(22);
         ll.remove(10);
-        System.out.println("after romove");
+        System.out.println("\n"+"after romove");
         ll.display();
     }
 }
