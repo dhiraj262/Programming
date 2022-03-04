@@ -20,11 +20,11 @@ class Solution {
             }
         }
         
-        int noEdges = connections.length -(n-1 -comp - 1);
-        if(noEdges < comp-1){
+        int extraEdges = connections.length -(n-1 -comp - 1);  //Extra Edges = total edges - (node-1- componets -1)
+        if(extraEdges < comp-1){
             return -1;
         }
-        return comp-1;
+        return comp-1; // minimum no of edges required.
     }
     
     private void dfs(int u, List<List<Integer>> adj,boolean[] visited ){
