@@ -141,3 +141,61 @@ static String toggleCase(char[] a)
 
 // Example : 11 - 3 set bits
 ```
+#### 10) Swap two values :
+```
+  a = a ^ b ^ (b = a)
+```
+
+#### 11) Take 3 integers and use the lowest number of flips to make the sum of the first two numbers equal to the third :
+```
+  static int noOfFlips(int a, int b, int c) {
+        int ans = 0;
+        for (int i = 0; i < 32; i++) {
+            int bitC = ((c >> i) & 1);
+            int bitA = ((a >> i) & 1);
+            int bitB = ((b >> i) & 1);
+ 
+            if ((bitA | bitB) != bitC) {
+                ans += (bitC == 0) ? (bitA == 1 && bitB == 1) ? 2 : 1 : 1;
+            }
+        }
+        return ans;
+    }
+```
+
+#### 12) Find the element in an array that is not repeated :
+
+```
+ static int singleNumber(int[] nums) {
+        int xor = 0;
+        for (int num : nums) {
+            xor ^= num;
+        }
+        return xor;
+    }
+    
+  - If we take XOR of zero and some bit, it will return that bit: a ^ 0 = a
+  - If we take XOR of two same bits, it will return 0: a ^ a = 0
+  - For n numbers, the below math can be applied: a ^ b ^ a = (a ^ a) ^ b = 0 ^ b = b
+```
+
+#### 13) Given an integer, find the position of the first set-bit (1) from the right :
+```
+private static int firstSetBitPosition(int n) {
+        if (n == 0) {
+            return 0;
+        }
+ 
+        int k = 1;
+ 
+        while (true) {
+            if ((n & (1 << (k - 1))) == 0) {
+                k++;
+            } else {
+                return k;
+            }
+        }
+    }
+    
+//if the rightmost significant bit is the set bet using bit & 1. If not, we keep shifting left and checking until we find the bit that makes our AND operation yield 1.
+```
